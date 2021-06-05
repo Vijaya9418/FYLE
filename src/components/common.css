@@ -1,0 +1,6 @@
+.branch{
+    transition-duration: .5s;
+}
+.branch:hover{
+    background-color:rgba(9, 255, 0, 0.685);
+}

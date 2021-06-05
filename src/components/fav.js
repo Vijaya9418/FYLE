@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
-import './common.css'
-export default class Table extends Component {
 
-    static={
-        data:"",
-        dictionary:""
+import React, { Component } from 'react'
+import { Redirect } from 'react-router';
+import './common.css';
+export default class fav extends Component {
+    componentDidMount(){
+        this.buildtableF();
     }
     save=(a,b)=>{
         var value=localStorage.getItem('store');
@@ -27,29 +27,32 @@ export default class Table extends Component {
         }
       
             }
-            open(a,b){
-                window.location.assign('/bank/'+a);
-            }
-    buildtable=(dict)=>{
+    open(a,b){
+        window.location.assign('/bank/'+a);
+    }
+    buildtableF=()=>{
         var stdata=localStorage.getItem('store');
         let count=1;
         var table=document.getElementById('tbody');
         table.innerHTML="";
-        for(let i of dict.keys()){
+        var dict=localStorage.getItem('store');
+        var branches=dict.split(",");
+        for(let i of branches){
+            if(i=="")continue;
             var column=document.createElement('tr');
             var th1=document.createElement('th');
+            th1.innerHTML=i;
+            th1.onclick=this.open.bind(this,i);
             th1.className='branch'
-            th1.onclick=this.open.bind(this,dict[i][0]);
-            th1.innerHTML=dict[i][0];
-            var th2=document.createElement('th');
-            th2.innerHTML=dict[i][1];
+
             var th3=document.createElement('th');
             th3.innerHTML=count;
             var th4=document.createElement('th');
            // th4.addEventListener(onclick,this.save)
-            th4.onclick=this.save.bind(this,dict[i][0])
-            th4.id=dict[i][0];
-            if(stdata.includes(dict[i][0])){
+            th4.onclick=this.save.bind(this,i);
+
+            th4.id=i;
+            if(stdata.includes(i)){
                 th4.innerHTML="  <i class='fa fa-star'  aria-hidden='true'></i>";
             }
             else{
@@ -57,42 +60,35 @@ export default class Table extends Component {
             }
             column.appendChild(th3)
             column.appendChild(th1);
-            column.appendChild(th2);
             column.appendChild(th4);
             count++;
             table.appendChild(column);
         }
         document.getElementById('tableview').setAttribute('class','');
     }
-   
-    static getDerivedStateFromProps(props, state) {
-      
-        return {data: props.data,dictionary:props.dictionary} 
-      }
+    
+    
     render() {
-        if(this.state.dictionary!='')
-        this.buildtable(this.state.dictionary);
+      
         return (
-            <div>
-                   <div class='invisible' id='tableview'>
-                  <div id='words' class="container bg-dark p-2 m-5 text-white">
-                      <table class="table ">
-                          <thead>
-                              <tr class='text-white'>
-                              <th>S.No</th>
-                                  <th>IFSC</th>
-                                  <th>Branch Name</th>
-                              </tr>
-                          </thead>
-                          <tbody id='tbody' class='text-white'>
-                            
-                          </tbody>
-                      </table>
-                  </div>
-
-                  
-                  </div>
+            <div class='invisible' id='tableview'>
+            <div id='words' class="container bg-dark p-2 m-5 text-white">
+                <table class="table ">
+                    <thead>
+                        <tr class='text-white'>
+                        <th>S.No</th>
+                            <th>IFSC</th>
+                        </tr>
+                    </thead>
+                    <tbody id='tbody' class='text-white'>
+                      
+                    </tbody>
+                </table>
+            </div>
+     
+            
             </div>
         )
     }
 }
+
