@@ -10,7 +10,7 @@ export default class Bank extends Component {
     getbranches=async()=>{
         try{
         var datareceived='';
-        const fun=await fetch("http://localhost:8080/api/autocomplete?q="+this.props.match.params.id+"&limit=4&offset=0")
+        const fun=await fetch("https://flye-assignment.herokuapp.com/api/autocomplete?q="+this.props.match.params.id+"&limit=4&offset=0")
           .then((res)=>res.json())
             .then(function(data){
                 datareceived=data;

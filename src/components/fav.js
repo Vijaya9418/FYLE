@@ -8,6 +8,9 @@ export default class fav extends Component {
     }
     save=(a,b)=>{
         var value=localStorage.getItem('store');
+        if(value===null){
+            value=""
+        }
         if(value.includes(","+a)){
             value=value.replace(","+a,"");
             console.log(value);
@@ -36,6 +39,12 @@ export default class fav extends Component {
         var table=document.getElementById('tbody');
         table.innerHTML="";
         var dict=localStorage.getItem('store');
+        if(stdata===null){
+            stdata=''
+        }
+        if(dict===null){
+            dict=''
+        }
         var branches=dict.split(",");
         for(let i of branches){
             if(i=="")continue;
@@ -72,6 +81,7 @@ export default class fav extends Component {
       
         return (
             <div class='invisible' id='tableview'>
+                <h1>Favourite Branches</h1>
             <div id='words' class="container bg-dark p-2 m-5 text-white">
                 <table class="table ">
                     <thead>

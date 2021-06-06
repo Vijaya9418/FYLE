@@ -8,6 +8,9 @@ export default class Table extends Component {
     }
     save=(a,b)=>{
         var value=localStorage.getItem('store');
+        if(value===null){
+            value=""
+        }
         if(value.includes(","+a)){
             value=value.replace(","+a,"");
             console.log(value);
@@ -32,6 +35,10 @@ export default class Table extends Component {
             }
     buildtable=(dict)=>{
         var stdata=localStorage.getItem('store');
+        if(stdata===null)
+        {
+            stdata=""
+        }
         let count=1;
         var table=document.getElementById('tbody');
         table.innerHTML="";

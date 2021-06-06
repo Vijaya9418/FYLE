@@ -44,7 +44,7 @@ export default class Home extends Component {
           this.setState({pageno:pagenoupdated})}
 
         var datareceived='';
-        const fun=await fetch("http://localhost:8080/api/all/all?start="+pagenoupdated+"&limit="+(pagenoupdated+count)+"")
+        const fun=await fetch("https://flye-assignment.herokuapp.com/api/all/all?start="+pagenoupdated+"&limit="+(pagenoupdated+count)+"")
           .then((res)=>res.json())
             .then(function(data){
                 datareceived=data;
@@ -62,7 +62,7 @@ export default class Home extends Component {
 autocomplete=async(e)=>{
     console.log("ok")
    var datareceived='';
-   const fun=await fetch("http://localhost:8080/api/branches/autocomplete?q="+e.target.value+"&limit=4&offset=0")
+   const fun=await fetch("https://flye-assignment.herokuapp.com/api/branches/autocomplete?q="+e.target.value+"&limit=4&offset=0")
      .then((res)=>res.json())
        .then(function(data){
            datareceived=data;
@@ -78,7 +78,7 @@ this.makeTable(datareceived);
 }
 getbranches=async(e)=>{
    var datareceived='';
-   const fun=await fetch("http://localhost:8080/api/autocomplete?q="+e.target.value+"&limit=4&offset=0")
+   const fun=await fetch("https://flye-assignment.herokuapp.com/api/autocomplete?q="+e.target.value+"&limit=4&offset=0")
      .then((res)=>res.json())
        .then(function(data){
            datareceived=data;
